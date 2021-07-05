@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/distribution_frame"
+    android:layout_width="match_parent"
+    android:layout_height="102dp"
+    android:background="@color/half_baked"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="onClickSpecificDistribution">
+
+    <ImageView
+        android:id="@+id/distribution_plot"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/blanched_almond"
+        android:contentDescription="plot" />
+
+    <TextView
+        android:id="@+id/distribution_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="10dp"
+        android:hint="distribution_name"
+        android:textColor="@color/snow"
+        android:textColorHint="@color/snow"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/distribution_formulae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="38dp"
+        android:padding="5dp"
+        android:textColor="@color/snow"
+        android:textColorHint="@color/snow"
+        android:textSize="18sp" />
+
+</FrameLayout>

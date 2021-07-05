@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/blanched_almond"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <View
+        android:layout_width="267dp"
+        android:layout_height="267dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-85dp"
+        android:layout_marginTop="-78dp"
+        android:background="@drawable/round_shape" />
+
+    <Button
+        android:id="@+id/settings_button"
+        style="@style/button_style"
+        android:layout_marginTop="210dp"
+        android:layout_marginBottom="130dp"
+        android:backgroundTint="@color/baltic_sea"
+        android:text="Настройки" />
+
+    <Button
+        android:id="@+id/combinatorics_button"
+        style="@style/button_style"
+        android:layout_below="@id/settings_button"
+        android:onClick="onClickCombinatorics"
+        android:text="Комбинаторика" />
+
+    <Button
+        android:id="@+id/distribution_button"
+        style="@style/button_style"
+        android:layout_below="@id/combinatorics_button"
+        android:layout_margin="24dp"
+        android:onClick="onCLickDistributions"
+        android:text="Распределения" />
+
+    <Button
+        android:id="@+id/statistics_button"
+        style="@style/button_style"
+        android:layout_below="@id/distribution_button"
+        android:text="Статистика" />
+
+    <View
+        android:layout_width="462dp"
+        android:layout_height="462dp"
+        android:layout_alignEnd="@id/statistics_button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-170dp"
+        android:layout_marginBottom="-140dp"
+        android:background="@drawable/round_shape" />
+</RelativeLayout>
