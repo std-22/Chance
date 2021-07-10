@@ -1,11 +1,11 @@
 package io.github.studio22.probably.model
 
-import io.github.studio22.probably.ContractInterface
+import io.github.studio22.probably.ContractInterface.Model
 import io.github.studio22.probably.calculations.DistributionsCalc
 
-class DistributionModelImpl: ContractInterface.Model {
+class DistributionModelImpl: Model {
     private val d = DistributionsCalc()
-    lateinit var distributionProbability: DoubleArray
+    var distributionProbability: DoubleArray = DoubleArray(10)
     var mathExp: Double = 0.0
     var dispersion: Double = 0.0
 

@@ -1,15 +1,14 @@
 package io.github.studio22.probably.presenter
 
-import android.util.Log
+import io.github.studio22.probably.ContractInterface.DistributionPresenter
 import io.github.studio22.probably.ContractInterface.DistributionView
-import io.github.studio22.probably.ContractInterface.Presenter
 import io.github.studio22.probably.model.DistributionModelImpl
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class DistributionPresenter(_view: DistributionView) : Presenter {
+class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter {
     private var view: DistributionView = _view
-    private var model: DistributionModelImpl = DistributionModelImpl()
+    var model: DistributionModelImpl = DistributionModelImpl()
 
     override fun setDistribution(
         distributionName: String,
@@ -27,4 +26,8 @@ class DistributionPresenter(_view: DistributionView) : Presenter {
         view.setMathExp(df.format(model.mathExp))
         view.setDispersion(df.format(model.dispersion))
     }
+
+    override fun getMathExp() = model.mathExp
+    override fun getDispersion() = model.dispersion
+    override fun getDistribution() = model.distributionProbability
 }

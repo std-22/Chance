@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/half_baked"
+    android:background="@color/blanched_almond"
     tools:context=".view.SpecificDistributionActivity">
 
     <include
@@ -15,10 +15,10 @@
         android:id="@+id/table_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/include"
         android:fillViewport="true"
         android:scrollbarStyle="insideInset"
-        android:scrollbars="horizontal">
+        android:scrollbars="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -30,19 +30,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/half_baked"
                 android:gravity="center"
                 android:stretchColumns="*">
 
-                <TableRow
-                    android:divider="@color/snow"
-                    android:showDividers="middle">
+                <TableRow>
 
                     <TextView
                         style="@style/table_cell_style"
                         android:text="\u03BE"
                         android:textSize="36sp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/event_0"
@@ -93,7 +90,7 @@
                         style="@style/table_cell_style"
                         android:text="p"
                         android:textSize="36sp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/p0"
@@ -137,9 +134,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/table_layout"
-        android:text="M\u03BE = "
-        android:textColor="@color/snow"
-        android:textSize="36sp" />
+        android:text="@string/math_exp"
+        android:textColor="@color/baltic_sea"
+        android:textSize="36sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
     <TextView
         android:id="@+id/math_expect_value"
@@ -147,19 +147,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/table_layout"
         android:layout_toEndOf="@id/math_expect"
-        android:textColor="@color/snow"
-        android:textSize="36sp" />
+        android:textColor="@color/baltic_sea"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/math_expect"
+        app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
     <TextView
         android:id="@+id/dispersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/table_layout"
-        android:layout_marginStart="50dp"
-        android:layout_toEndOf="@id/math_expect_value"
-        android:text="D\u03BE = "
-        android:textColor="@color/snow"
-        android:textSize="36sp" />
+        android:text="@string/dispersion"
+        android:textColor="@color/baltic_sea"
+        android:textSize="36sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/math_expect"
+        app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
     <TextView
         android:id="@+id/dispersion_value"
@@ -168,15 +171,9 @@
         android:layout_below="@id/table_layout"
         android:layout_toEndOf="@id/dispersion"
         android:gravity="center_horizontal"
-        android:textColor="@color/snow"
-        android:textSize="36sp" />
+        android:textColor="@color/baltic_sea"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/dispersion"
+        app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/snow"
-        android:id="@+id/whatisthis"
-        android:layout_below="@+id/dispersion_value"/>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

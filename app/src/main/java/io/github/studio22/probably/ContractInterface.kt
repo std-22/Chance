@@ -13,11 +13,14 @@ interface ContractInterface {
         fun setDispersion(dispersion: String)
     }
 
-    interface Presenter {
+    interface DistributionPresenter {
         fun setDistribution(
             distributionName: String,
             eventQuantity: Int = 0,
             eventProbability: Double = 0.0
         )
+        fun getMathExp(): Double
+        fun getDispersion(): Double
+        fun getDistribution(): DoubleArray
     }
 }

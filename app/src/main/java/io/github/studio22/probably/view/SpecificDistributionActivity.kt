@@ -1,61 +1,43 @@
 package io.github.studio22.probably.view
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import io.github.studio22.probably.ContractInterface
 import io.github.studio22.probably.DistributionActivity
 import io.github.studio22.probably.R
-import io.github.studio22.probably.presenter.DistributionPresenter
+import io.github.studio22.probably.presenter.DistributionPresenterImpl
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 
-class SpecificDistributionActivity : AppCompatActivity(), ContractInterface.DistributionView {
+class SpecificDistributionActivity : FragmentActivity(), ContractInterface.DistributionView {
 
-    private var presenter: ContractInterface.Presenter? = null
+    private var presenter: ContractInterface.DistributionPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(R.layout.activity_specific_distribution)
         val textView = findViewById<TextView>(R.id.header_name)
         textView.text = intent.extras?.get("distribution_name").toString()
 
-        presenter = DistributionPresenter(this)
+        presenter = DistributionPresenterImpl(this)
 
-        val distributions = resources.getStringArray(R.array.distributions)
+        openDialog(intent.extras?.get("distribution_name").toString())
 
-
-
-        when (intent.extras?.get("distribution_name").toString()) {
-            distributions[0] -> {
-                openDialog("Биноминальное")
-            }
-        }
-
-    }
-
-    fun onClickBack(view: View) {
-        val intent = Intent(this, DistributionActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-    }
-
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     override fun openDialog(distributionName: String) {
         MaterialDialog(this).show {
             title(text = "Ввод данных")
             customView(R.layout.dialog)
+
             positiveButton {
                 val eventNumber =
                     findViewById<EditText>(R.id.input_event_number).text.toString().toInt()
@@ -69,7 +51,6 @@ class SpecificDistributionActivity : AppCompatActivity(), ContractInterface.Dist
                 Toast.makeText(context, "NEGATIVE", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     override fun setDistributionProbability(array: DoubleArray) {
@@ -105,13 +86,44 @@ class SpecificDistributionActivity : AppCompatActivity(), ContractInterface.Dist
     }
 
     override fun setMathExp(mathExp: String) {
+        val textView = findViewById<TextView>(R.id.math_expect)
+        textView.visibility = View.VISIBLE
         val mathExpectationTV = findViewById<TextView>(R.id.math_expect_value)
         mathExpectationTV.text = mathExp
     }
 
     override fun setDispersion(dispersion: String) {
+        val textView = findViewById<TextView>(R.id.dispersion)
+        textView.visibility = View.VISIBLE
         val dispersionTV = findViewById<TextView>(R.id.dispersion_value)
         dispersionTV.text = dispersion
     }
 
+    fun onClickBack(view: View) {
+        val intent = Intent(this, DistributionActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//
+//        presenter?.let { outState.putDouble("MATH_EXP", it.getMathExp()) }
+//        presenter?.let { outState.putDouble("DISPERSION", it.getDispersion()) }
+//        presenter?.let { outState.putDoubleArray("DISTRIBUTION", it.getDistribution()) }
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        savedInstanceState.let {
+//            setMathExp(it.get("MATH_EXP") as String)
+//            setDispersion(it.get("DISPERSION") as String)
+//            setDistributionProbability(it.get("DISTRIBUTION") as DoubleArray)
+//        }
+//    }
 }

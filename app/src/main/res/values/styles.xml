@@ -12,14 +12,13 @@
         <item name="android:textColor">@color/snow</item>
         <item name="android:layout_width">315dp</item>
         <item name="android:layout_height">68dp</item>
-        <item name="android:layout_centerHorizontal">true</item>
     </style>
 
     <style name="table_cell_style">
         <item name="android:textSize">36sp</item>
         <item name="android:visibility">gone</item>
         <item name="minWidth">75dp</item>
-        <item name="android:textColor">@color/snow</item>
+        <item name="android:textColor">@color/baltic_sea</item>
         <item name="android:textAlignment">center</item>
     </style>
 </resources>

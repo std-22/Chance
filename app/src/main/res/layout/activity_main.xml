@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,49 +10,64 @@
     tools:context=".MainActivity">
 
 
-    <View
-        android:layout_width="267dp"
-        android:layout_height="267dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="-85dp"
-        android:layout_marginTop="-78dp"
-        android:background="@drawable/round_shape" />
+    <!--    <View-->
+    <!--        android:layout_width="267dp"-->
+    <!--        android:layout_height="267dp"-->
+    <!--        android:background="@drawable/round_shape"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
         android:id="@+id/settings_button"
         style="@style/button_style"
-        android:layout_marginTop="210dp"
-        android:layout_marginBottom="130dp"
         android:backgroundTint="@color/baltic_sea"
-        android:text="Настройки" />
+        android:text="@string/settings_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/combinatorics_button"/>
+
 
     <Button
         android:id="@+id/combinatorics_button"
         style="@style/button_style"
-        android:layout_below="@id/settings_button"
         android:onClick="onClickCombinatorics"
-        android:text="Комбинаторика" />
+        android:text="@string/combinatorics_button"
+        app:layout_constraintBottom_toTopOf="@+id/distribution_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_button"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/distribution_button"
         style="@style/button_style"
-        android:layout_below="@id/combinatorics_button"
-        android:layout_margin="24dp"
         android:onClick="onCLickDistributions"
-        android:text="Распределения" />
+        android:text="@string/distribution_button"
+        app:layout_constraintBottom_toTopOf="@+id/statistics_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/combinatorics_button" />
 
     <Button
         android:id="@+id/statistics_button"
         style="@style/button_style"
-        android:layout_below="@id/distribution_button"
-        android:text="Статистика" />
+        android:text="@string/statistics_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distribution_button" />
 
-    <View
-        android:layout_width="462dp"
-        android:layout_height="462dp"
-        android:layout_alignEnd="@id/statistics_button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-170dp"
-        android:layout_marginBottom="-140dp"
-        android:background="@drawable/round_shape" />
-</RelativeLayout>
+    <!--    <View-->
+    <!--        android:layout_width="462dp"-->
+    <!--        android:layout_height="462dp"-->
+    <!--        android:layout_alignEnd="@id/statistics_button"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_marginEnd="-170dp"-->
+    <!--        android:layout_marginBottom="-140dp"-->
+    <!--        android:background="@drawable/round_shape"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>

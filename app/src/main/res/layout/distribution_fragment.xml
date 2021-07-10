@@ -3,7 +3,7 @@
     android:id="@+id/distribution_frame"
     android:layout_width="match_parent"
     android:layout_height="102dp"
-    android:background="@color/half_baked"
+    android:background="@color/blanched_almond"
     android:clickable="true"
     android:focusable="true"
     android:onClick="onClickSpecificDistribution">
@@ -13,8 +13,8 @@
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:layout_gravity="center_vertical"
-        android:background="@color/blanched_almond"
-        android:contentDescription="plot" />
+        android:background="@color/arapawa"
+        android:contentDescription="@string/plot" />
 
     <TextView
         android:id="@+id/distribution_name"
@@ -22,9 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginTop="10dp"
-        android:hint="distribution_name"
-        android:textColor="@color/snow"
-        android:textColorHint="@color/snow"
+        android:textColor="@color/baltic_sea"
+        android:textColorHint="@color/baltic_sea"
         android:textSize="20sp" />
 
     <ImageView
@@ -34,8 +33,7 @@
         android:layout_marginStart="115dp"
         android:layout_marginTop="38dp"
         android:padding="5dp"
-        android:textColor="@color/snow"
-        android:textColorHint="@color/snow"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:contentDescription="@string/formulae" />
 
 </FrameLayout>
