@@ -22,5 +22,8 @@ interface ContractInterface {
         fun getMathExp(): Double
         fun getDispersion(): Double
         fun getDistribution(): DoubleArray
+//        fun setMathExpToModel(mathExp: Double)
+//        fun setDispersionToModel(dispersion: Double)
+//        fun setDistributionToModel(distribution: DoubleArray)
     }
 }

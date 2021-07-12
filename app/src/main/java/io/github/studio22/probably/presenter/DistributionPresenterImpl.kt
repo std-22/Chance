@@ -1,14 +1,29 @@
 package io.github.studio22.probably.presenter
 
+import java.math.BigDecimal
 import io.github.studio22.probably.ContractInterface.DistributionPresenter
 import io.github.studio22.probably.ContractInterface.DistributionView
 import io.github.studio22.probably.model.DistributionModelImpl
 import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter {
     private var view: DistributionView = _view
     var model: DistributionModelImpl = DistributionModelImpl()
+
+    constructor(
+        distributionView: DistributionView,
+        distribution: DoubleArray?,
+        mathExp: Double?,
+        dispersion: Double?
+    ) : this(distributionView) {
+        mathExp?.let {
+            model.mathExp = BigDecimal(mathExp).setScale(2, RoundingMode.HALF_EVEN).toDouble()
+        }
+        dispersion?.let {
+            model.dispersion = BigDecimal(dispersion).setScale(2, RoundingMode.HALF_EVEN).toDouble()
+        }
+        distribution?.let { model.distributionProbability = distribution }
+    }
 
     override fun setDistribution(
         distributionName: String,
@@ -20,14 +35,19 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
                 model.binomialCalc(eventQuantity, eventProbability)
             }
         }
-        val df = DecimalFormat("#.###")
-        df.roundingMode = RoundingMode.CEILING
+
         view.setDistributionProbability(model.distributionProbability)
-        view.setMathExp(df.format(model.mathExp))
-        view.setDispersion(df.format(model.dispersion))
+        view.setMathExp(model.mathExp.toString())
+        view.setDispersion(model.dispersion.toString())
     }
 
     override fun getMathExp() = model.mathExp
+
     override fun getDispersion() = model.dispersion
+
     override fun getDistribution() = model.distributionProbability
+
+    override fun toString(): String {
+        return "${model.mathExp}, ${model.dispersion}"
+    }
 }
