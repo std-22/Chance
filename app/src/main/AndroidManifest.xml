@@ -8,9 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Probably">
-        <activity android:name=".view.SpecificDistributionActivity" />
-        <activity android:name=".DistributionActivity" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".distributions_module.view.SpecificDistributionActivity" />
+        <activity android:name=".distributions_module.DistributionActivity" />
         <activity android:name=".CombinatoricsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

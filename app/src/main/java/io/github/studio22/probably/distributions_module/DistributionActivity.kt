@@ -1,4 +1,4 @@
-package io.github.studio22.probably
+package io.github.studio22.probably.distributions_module
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.github.studio22.probably.MainActivity
+import io.github.studio22.probably.R
 
 class DistributionActivity : AppCompatActivity() {
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -17,7 +19,7 @@ class DistributionActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_distribution)
         val textView = findViewById<TextView>(R.id.header_name)
-        textView.text = "Распределения"
+        textView.text = getString(R.string.distributions)
 
         layoutManager = LinearLayoutManager(this)
         val recyclerView = findViewById<RecyclerView>(R.id.distribution_recycler_view)

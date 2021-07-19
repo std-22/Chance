@@ -1,9 +1,9 @@
-package io.github.studio22.probably.presenter
+package io.github.studio22.probably.distributions_module.presenter
 
 import java.math.BigDecimal
 import io.github.studio22.probably.ContractInterface.DistributionPresenter
 import io.github.studio22.probably.ContractInterface.DistributionView
-import io.github.studio22.probably.model.DistributionModelImpl
+import io.github.studio22.probably.distributions_module.model.DistributionModelImpl
 import java.math.RoundingMode
 
 class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter {
@@ -22,7 +22,9 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
         dispersion?.let {
             model.dispersion = BigDecimal(dispersion).setScale(2, RoundingMode.HALF_EVEN).toDouble()
         }
-        distribution?.let { model.distributionProbability = distribution }
+        distribution?.let {
+            model.distributionProbability = distribution
+        }
     }
 
     override fun setDistribution(

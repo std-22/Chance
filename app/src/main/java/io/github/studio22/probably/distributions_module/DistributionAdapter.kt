@@ -1,4 +1,4 @@
-package io.github.studio22.probably
+package io.github.studio22.probably.distributions_module
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import io.github.studio22.probably.view.SpecificDistributionActivity
+import io.github.studio22.probably.R
+import io.github.studio22.probably.distributions_module.view.SpecificDistributionActivity
 
 class DistributionAdapter : RecyclerView.Adapter<DistributionAdapter.ViewHolder>() {
 
@@ -41,7 +42,7 @@ class DistributionAdapter : RecyclerView.Adapter<DistributionAdapter.ViewHolder>
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): DistributionAdapter.ViewHolder {
+    ): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.distribution_fragment, parent, false)
         return ViewHolder(itemView)

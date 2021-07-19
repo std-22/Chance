@@ -32,6 +32,8 @@ android {
     }
 }
 
+apply plugin: 'kotlin-kapt'
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -51,4 +53,11 @@ dependencies {
 
     // Graphic View
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Moxy
+    implementation "com.github.moxy-community:moxy:1.5.5"
+    kapt "com.github.moxy-community:moxy-compiler:1.5.5"
+    implementation "com.github.moxy-community:moxy-android:1.5.5"
+    implementation "com.github.moxy-community:moxy-app-compat:1.5.5"
+
 }

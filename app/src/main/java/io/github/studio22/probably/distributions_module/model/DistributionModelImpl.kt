@@ -1,4 +1,4 @@
-package io.github.studio22.probably.model
+package io.github.studio22.probably.distributions_module.model
 
 import io.github.studio22.probably.ContractInterface.Model
 import io.github.studio22.probably.calculations.DistributionsCalc

@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanched_almond"
-    tools:context=".view.SpecificDistributionActivity">
+    tools:context=".distributions_module.view.SpecificDistributionActivity">
 
     <include
         android:id="@+id/include"
         layout="@layout/header" />
+
 
     <ScrollView
         android:id="@+id/table_layout"

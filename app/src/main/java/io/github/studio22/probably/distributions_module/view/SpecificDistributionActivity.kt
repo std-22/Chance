@@ -1,4 +1,4 @@
-package io.github.studio22.probably.view
+package io.github.studio22.probably.distributions_module.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import io.github.studio22.probably.ContractInterface
-import io.github.studio22.probably.DistributionActivity
+import io.github.studio22.probably.distributions_module.DistributionActivity
 import io.github.studio22.probably.R
-import io.github.studio22.probably.presenter.DistributionPresenterImpl
+import io.github.studio22.probably.distributions_module.presenter.DistributionPresenterImpl
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
