@@ -3,7 +3,6 @@ package io.github.studio22.probably.distributions_module
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,18 +15,32 @@ class DistributionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(R.layout.activity_distribution)
-        val textView = findViewById<TextView>(R.id.header_name)
-        textView.text = getString(R.string.distributions)
 
+        setActionBar()
+
+        setLayoutManagerAdapter()
+    }
+
+    private fun setLayoutManagerAdapter() {
         layoutManager = LinearLayoutManager(this)
         val recyclerView = findViewById<RecyclerView>(R.id.distribution_recycler_view)
         recyclerView.layoutManager = layoutManager
-
         adapter = DistributionAdapter()
         recyclerView.adapter = adapter
+    }
 
+    private fun setActionBar() {
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = getString(R.string.distributions)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     fun onClickBack(view: View) {

@@ -1,18 +1,31 @@
-package io.github.studio22.probably
+package io.github.studio22.probably.combinatorics_module
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import io.github.studio22.probably.MainActivity
+import io.github.studio22.probably.R
 
 class CombinatoricsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_combinatorics)
-        val textView = findViewById<TextView>(R.id.header_name)
-        textView.text = intent.extras?.get("section_name").toString()
+        setActionBar()
+    }
+
+    private fun setActionBar() {
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = getString(R.string.combinatorics)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     fun onClickBack(view: View) {

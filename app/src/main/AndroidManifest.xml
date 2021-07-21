@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".distributions_module.view.SpecificDistributionActivity" />
         <activity android:name=".distributions_module.DistributionActivity" />
-        <activity android:name=".CombinatoricsActivity" />
+        <activity android:name=".combinatorics_module.CombinatoricsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

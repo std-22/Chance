@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CombinatoricsActivity">
+    tools:context=".combinatorics_module.CombinatoricsActivity">
 
-    <include layout="@layout/header"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:titleTextColor="@color/baltic_sea"
+        android:theme="@style/Theme.Probably"
+        app:popupTheme="@style/Theme.Probably"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

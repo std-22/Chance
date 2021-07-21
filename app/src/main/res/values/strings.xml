@@ -1,18 +1,25 @@
 <resources>
     <string name="app_name">Chancema</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Button names -->
     <string name="settings_button">Настройки</string>
     <string name="combinatorics_button">Комбинаторика</string>
     <string name="distribution_button">Распределения</string>
     <string name="statistics_button">Статистика</string>
+
+    <!-- Module names  -->
     <string name="distributions">Распределения</string>
+    <string name="combinatorics">Комбинаторика</string>
+    <string name="statistics">Статистика</string>
+    <string name="settings">Настройки</string>
+
+
     <string name="math_exp">Mξ =</string>
     <string name="dispersion">Dξ =</string>
     <string name="input_event_probability">Вероятность события</string>
     <string name="input_event_number">Количество событий</string>
     <string name="plot">plot</string>
     <string name="formulae">formulae</string>
-    <string-array name="distributions">
+    <string-array name="distribution_types">
         <item>Биноминальное</item>
     </string-array>
 </resources>

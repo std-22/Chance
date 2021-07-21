@@ -2,8 +2,8 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/arapawa</item>
-        <item name="md_background_color">@color/arapawa</item>
+        <item name="md_background_color">@color/blanched_almond</item>
+        <item name="android:textColor">@color/arapawa</item>
     </style>
 
     <style name="button_style">

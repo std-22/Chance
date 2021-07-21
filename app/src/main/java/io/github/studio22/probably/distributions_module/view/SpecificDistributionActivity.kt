@@ -5,31 +5,45 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import io.github.studio22.probably.ContractInterface
-import io.github.studio22.probably.distributions_module.DistributionActivity
 import io.github.studio22.probably.R
+import io.github.studio22.probably.distributions_module.DistributionActivity
 import io.github.studio22.probably.distributions_module.presenter.DistributionPresenterImpl
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 
-class SpecificDistributionActivity : FragmentActivity(), ContractInterface.DistributionView {
+class SpecificDistributionActivity : ContractInterface.DistributionView,
+    AppCompatActivity() {
 
     private var presenter: ContractInterface.DistributionPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_specific_distribution)
-        val textView = findViewById<TextView>(R.id.header_name)
-        textView.text = intent.extras?.get("distribution_name").toString()
+
+        setActionBar()
 
         if (savedInstanceState == null) {
             presenter = DistributionPresenterImpl(this)
             openDialog(intent.extras?.get("distribution_name").toString())
         }
+    }
+
+    private fun setActionBar() {
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = intent.extras?.get("distribution_name").toString()
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun openDialog(distributionName: String) {
@@ -46,8 +60,7 @@ class SpecificDistributionActivity : FragmentActivity(), ContractInterface.Distr
                 dismiss()
             }
             negativeButton {
-                val intent = Intent(context, DistributionActivity::class.java)
-                startActivity(intent)
+                onSupportNavigateUp()
             }
         }
     }
