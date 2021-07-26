@@ -1,9 +1,9 @@
 package io.github.studio22.probably.distributions_module.presenter
 
-import java.math.BigDecimal
 import io.github.studio22.probably.ContractInterface.DistributionPresenter
 import io.github.studio22.probably.ContractInterface.DistributionView
 import io.github.studio22.probably.distributions_module.model.DistributionModelImpl
+import java.math.BigDecimal
 import java.math.RoundingMode
 
 class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter {
@@ -41,6 +41,7 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
         view.setDistributionProbability(model.distributionProbability)
         view.setMathExp(model.mathExp.toString())
         view.setDispersion(model.dispersion.toString())
+        view.setGraphic(model.distributionProbability)
     }
 
     override fun getMathExp() = model.mathExp

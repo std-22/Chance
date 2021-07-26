@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanched_almond"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".distributions_module.view.SpecificDistributionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:titleTextColor="@color/baltic_sea"
         android:elevation="4dp"
         android:theme="@style/Theme.Probably"
-        app:popupTheme="@style/Theme.Probably"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/Theme.Probably"
+        app:titleTextColor="@color/baltic_sea" />
 
     <ScrollView
         android:id="@+id/table_layout"
@@ -139,49 +140,53 @@
 
     <TextView
         android:id="@+id/math_expect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_style"
         android:layout_below="@id/table_layout"
         android:text="@string/math_exp"
-        android:textColor="@color/baltic_sea"
-        android:textSize="36sp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
     <TextView
         android:id="@+id/math_expect_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_style"
+        android:visibility="visible"
         android:layout_below="@id/table_layout"
         android:layout_toEndOf="@id/math_expect"
-        android:textColor="@color/baltic_sea"
-        android:textSize="36sp"
         app:layout_constraintStart_toEndOf="@+id/math_expect"
         app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
     <TextView
         android:id="@+id/dispersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/text_style"
         android:layout_below="@id/table_layout"
         android:text="@string/dispersion"
-        android:textColor="@color/baltic_sea"
-        android:textSize="36sp"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/math_expect" />
 
     <TextView
         android:id="@+id/dispersion_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/table_layout"
+        style="@style/text_style"
+        android:visibility="visible"
         android:layout_toEndOf="@id/dispersion"
         android:gravity="center_horizontal"
-        android:textColor="@color/baltic_sea"
-        android:textSize="36sp"
         app:layout_constraintStart_toEndOf="@+id/dispersion"
         app:layout_constraintTop_toBottomOf="@+id/math_expect" />
 
+    <TextView
+        android:id="@+id/graphic_name"
+        style="@style/text_style"
+        android:text="График функции распределения"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/dispersion_value"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/distribution_graphic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graphic_name">
+
+    </com.github.mikephil.charting.charts.BarChart>
 </androidx.constraintlayout.widget.ConstraintLayout>

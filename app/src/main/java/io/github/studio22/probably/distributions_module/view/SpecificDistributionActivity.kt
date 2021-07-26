@@ -1,6 +1,5 @@
 package io.github.studio22.probably.distributions_module.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -8,9 +7,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import io.github.studio22.probably.ContractInterface
 import io.github.studio22.probably.R
-import io.github.studio22.probably.distributions_module.DistributionActivity
 import io.github.studio22.probably.distributions_module.presenter.DistributionPresenterImpl
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -111,10 +113,23 @@ class SpecificDistributionActivity : ContractInterface.DistributionView,
         dispersionTV.text = dispersion
     }
 
-    fun onClickBack(view: View) {
-        val intent = Intent(this, DistributionActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    override fun setGraphic(array: DoubleArray) {
+        val graphicName = findViewById<TextView>(R.id.graphic_name)
+        graphicName.visibility = View.VISIBLE
+        val mChart = findViewById<BarChart>(R.id.distribution_graphic)
+        mChart.visibility = View.VISIBLE
+
+        val entries: ArrayList<BarEntry> = ArrayList()
+        var prevSum = 0.0
+        for (i in array.indices) {
+            prevSum += array[i]
+            entries.add(BarEntry(i.toFloat(), prevSum.toFloat()))
+        }
+
+        val dataSet = BarDataSet(entries, "Label")
+        val barData = BarData(dataSet)
+        mChart.data = barData
+        mChart.invalidate()
     }
 
     override fun finish() {
@@ -140,6 +155,7 @@ class SpecificDistributionActivity : ContractInterface.DistributionView,
         setMathExp(presenter?.getMathExp().toString())
         setDispersion(presenter?.getDispersion().toString())
         presenter?.getDistribution()?.let { setDistributionProbability(it) }
+        presenter?.getDistribution()?.let { setGraphic(it) }
         super.onRestoreInstanceState(savedInstanceState)
     }
 }

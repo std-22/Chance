@@ -11,6 +11,7 @@ interface ContractInterface {
         fun setDistributionProbability(array: DoubleArray)
         fun setMathExp(mathExp: String)
         fun setDispersion(dispersion: String)
+        fun setGraphic(array: DoubleArray)
     }
 
     interface DistributionPresenter {
