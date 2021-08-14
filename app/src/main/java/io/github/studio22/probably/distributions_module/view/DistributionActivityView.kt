@@ -2,26 +2,22 @@ package io.github.studio22.probably.distributions_module.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
+import androidx.fragment.app.DialogFragment
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import io.github.studio22.probably.ContractInterface
+import io.github.studio22.probably.MVPContractInterface
 import io.github.studio22.probably.R
+import io.github.studio22.probably.distributions_module.DistributionDialogFragment
 import io.github.studio22.probably.distributions_module.presenter.DistributionPresenterImpl
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 
-class SpecificDistributionActivity : ContractInterface.DistributionView,
-    AppCompatActivity() {
-
-    private var presenter: ContractInterface.DistributionPresenter? = null
+class DistributionActivityView : MVPContractInterface.DistributionView,
+    AppCompatActivity(), DistributionDialogFragment.DialogListener {
+    private var presenter: MVPContractInterface.DistributionPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,22 +45,8 @@ class SpecificDistributionActivity : ContractInterface.DistributionView,
     }
 
     override fun openDialog(distributionName: String) {
-        MaterialDialog(this).show {
-            title(text = "Ввод данных")
-            customView(R.layout.dialog)
-            positiveButton {
-                val eventNumber =
-                    findViewById<EditText>(R.id.input_event_number).text.toString().toInt()
-                val eventProbability =
-                    findViewById<EditText>(R.id.input_event_probability).text.toString()
-                        .toDouble()
-                presenter?.setDistribution(distributionName, eventNumber, eventProbability)
-                dismiss()
-            }
-            negativeButton {
-                onSupportNavigateUp()
-            }
-        }
+        val dialog = DistributionDialogFragment()
+        dialog.show(supportFragmentManager, "")
     }
 
     override fun setDistributionProbability(array: DoubleArray) {
@@ -88,14 +70,12 @@ class SpecificDistributionActivity : ContractInterface.DistributionView,
             R.id.p6,
             R.id.p7
         )
-        val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.CEILING
         for (i in array.indices) {
             val eventNumberTV = findViewById<TextView>(eventNumbers[i])
             eventNumberTV.visibility = View.VISIBLE
             val eventProbabilityTV = findViewById<TextView>(eventNumberProbabilities[i])
             eventProbabilityTV.visibility = View.VISIBLE
-            eventProbabilityTV.text = df.format(array[i])
+            eventProbabilityTV.text = array[i].toString()
         }
     }
 
@@ -157,5 +137,17 @@ class SpecificDistributionActivity : ContractInterface.DistributionView,
         presenter?.getDistribution()?.let { setDistributionProbability(it) }
         presenter?.getDistribution()?.let { setGraphic(it) }
         super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment) {
+        onSupportNavigateUp()
+    }
+
+    override fun onDialogPositiveClick(eventQuantity: Int, eventProbability: Double) {
+        presenter?.setDistribution(
+            intent.extras?.get("distribution_name").toString(),
+            eventQuantity,
+            eventProbability
+        )
     }
 }

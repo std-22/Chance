@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/blanched_almond"
     android:scrollbarAlwaysDrawVerticalTrack="true"
-    tools:context=".distributions_module.view.SpecificDistributionActivity">
+    tools:context=".distributions_module.view.DistributionActivityView">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"

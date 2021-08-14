@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".distributions_module.view.SpecificDistributionActivity" />
+        <activity android:name=".distributions_module.view.DistributionActivityView" />
         <activity android:name=".distributions_module.DistributionActivity" />
         <activity android:name=".combinatorics_module.CombinatoricsActivity" />
         <activity android:name=".MainActivity">

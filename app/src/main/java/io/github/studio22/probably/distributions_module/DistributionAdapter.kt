@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.github.studio22.probably.R
-import io.github.studio22.probably.distributions_module.view.SpecificDistributionActivity
+import io.github.studio22.probably.distributions_module.view.DistributionActivityView
 
 class DistributionAdapter : RecyclerView.Adapter<DistributionAdapter.ViewHolder>() {
 
@@ -19,7 +19,7 @@ class DistributionAdapter : RecyclerView.Adapter<DistributionAdapter.ViewHolder>
 
         init {
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, SpecificDistributionActivity::class.java)
+                val intent = Intent(itemView.context, DistributionActivityView::class.java)
                 intent.putExtra("distribution_name", distributionName.text)
                 itemView.context.startActivity(intent)
             }

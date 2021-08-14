@@ -1,7 +1,7 @@
 package io.github.studio22.probably.calculations
 
 class CombinatoricsCalc {
-    private fun factorial(n: Int): Int {
+    fun factorial(n: Int): Int {
         if (n == 0 || n == 1) {
             return 1
         }

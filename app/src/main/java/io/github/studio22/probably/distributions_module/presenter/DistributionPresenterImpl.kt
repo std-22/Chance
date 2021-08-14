@@ -1,14 +1,14 @@
 package io.github.studio22.probably.distributions_module.presenter
 
-import io.github.studio22.probably.ContractInterface.DistributionPresenter
-import io.github.studio22.probably.ContractInterface.DistributionView
+import io.github.studio22.probably.MVPContractInterface.DistributionPresenter
+import io.github.studio22.probably.MVPContractInterface.DistributionView
 import io.github.studio22.probably.distributions_module.model.DistributionModelImpl
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter {
     private var view: DistributionView = _view
-    var model: DistributionModelImpl = DistributionModelImpl()
+    private var model: DistributionModelImpl = DistributionModelImpl()
 
     constructor(
         distributionView: DistributionView,
@@ -30,11 +30,15 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
     override fun setDistribution(
         distributionName: String,
         eventQuantity: Int,
-        eventProbability: Double
+        eventProbability: Double,
+        lambda: Double
     ) {
         when (distributionName) {
             "Биноминальное" -> {
-                model.binomialCalc(eventQuantity, eventProbability)
+                model.binomialModel(eventQuantity, eventProbability)
+            }
+            "Пуассона" -> {
+                model.poissonModel(eventQuantity, lambda)
             }
         }
 

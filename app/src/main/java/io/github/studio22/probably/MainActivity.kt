@@ -8,6 +8,7 @@ import io.github.studio22.probably.combinatorics_module.CombinatoricsActivity
 import io.github.studio22.probably.distributions_module.DistributionActivity
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()

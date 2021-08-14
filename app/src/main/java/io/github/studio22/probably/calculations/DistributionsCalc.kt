@@ -5,17 +5,36 @@ import java.math.RoundingMode
 import kotlin.math.pow
 
 class DistributionsCalc {
-    companion object
+    private val c = CombinatoricsCalc()
 
-    fun binomialDistribution(n: Int, p: Double): DoubleArray {
-        val c = CombinatoricsCalc()
-        val pArray = DoubleArray(n + 1)
-        for (i in 0..n) {
-            pArray[i] = BigDecimal(c.combinations(n, i) * p.pow(i) * (1 - p).pow(n - i)).setScale(
+    fun binomialDistribution(eventQuantity: Int, eventProbability: Double): DoubleArray {
+        val pArray = DoubleArray(eventQuantity + 1)
+        for (i in 0..eventQuantity) {
+            pArray[i] = BigDecimal(c.combinations(eventQuantity, i) * eventProbability.pow(i) * (1 - eventProbability).pow(eventQuantity - i)).setScale(
                 2,
                 RoundingMode.HALF_EVEN
             ).toDouble()
         }
         return pArray
+    }
+
+    fun geomShortDistribution(eventQuantity: Int, eventProbability: Double): DoubleArray {
+        val array = DoubleArray(eventQuantity + 1)
+        for (i in 0..eventQuantity) {
+            array[i] = eventProbability * (1 - eventProbability).pow(i)
+        }
+        return array
+    }
+
+    fun geomDistribution() {
+
+    }
+
+    fun poissonDistribution(eventQuantity: Int, lambda: Double): DoubleArray {
+        val array = DoubleArray(eventQuantity + 1)
+        for (i in 0..eventQuantity) {
+            array[i] = lambda.pow(i) / c.factorial(i) * Math.E.pow(-lambda)
+        }
+        return array
     }
 }
