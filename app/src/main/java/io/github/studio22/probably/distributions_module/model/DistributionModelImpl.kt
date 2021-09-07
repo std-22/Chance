@@ -2,8 +2,7 @@ package io.github.studio22.probably.distributions_module.model
 
 import io.github.studio22.probably.MVPContractInterface.DistributionModel
 import io.github.studio22.probably.calculations.DistributionsCalc
-import java.math.BigDecimal
-import java.math.RoundingMode
+import io.github.studio22.probably.extensions.round
 import kotlin.math.pow
 
 class DistributionModelImpl : DistributionModel {
@@ -14,34 +13,28 @@ class DistributionModelImpl : DistributionModel {
 
     override fun binomialModel(eventQuantity: Int, eventProbability: Double) {
         distributionProbability = d.binomialDistribution(eventQuantity, eventProbability)
-        mathExp = BigDecimal(eventQuantity * eventProbability)
-            .setScale(2, RoundingMode.HALF_EVEN).toDouble()
-        dispersion = BigDecimal(eventQuantity * eventProbability * (1 - eventProbability))
-            .setScale(2, RoundingMode.HALF_EVEN).toDouble()
-    }
+        mathExp = (eventQuantity * eventProbability).round()
+        dispersion = (eventQuantity * eventProbability * (1 - eventProbability)).round()
 
-    override fun geomShortModel(eventQuantity: Int, eventProbability: Double) {
-        distributionProbability = d.geomShortDistribution(eventQuantity, eventProbability)
-        mathExp = BigDecimal(1 / eventProbability)
-            .setScale(2, RoundingMode.HALF_EVEN).toDouble()
-        dispersion = BigDecimal(eventProbability / (1 - eventProbability).pow(2))
-            .setScale(2, RoundingMode.HALF_EVEN).toDouble()
     }
 
     override fun geomModel(eventProbability: Double) {
+        distributionProbability = d.geomDistribution(eventProbability)
+        mathExp = (1 / eventProbability).round()
+        dispersion = eventProbability / (1 - eventProbability).pow(2).round()
     }
 
-    override fun poissonModel(eventQuantity: Int, lambda: Double) {
-        distributionProbability = d.poissonDistribution(eventQuantity, lambda)
-        mathExp = BigDecimal(lambda).setScale(2, RoundingMode.HALF_EVEN).toDouble()
-        dispersion = BigDecimal(lambda).setScale(2, RoundingMode.HALF_EVEN).toDouble()
+    override fun poissonModel(lambda: Double) {
+        distributionProbability = d.poissonDistribution(lambda)
+        mathExp = lambda.round()
+        dispersion = lambda.round()
     }
 
     override fun expModel(lambda: Double) {
+        TODO("Not yet implemented")
     }
 
     override fun uniformModel(start: Double, end: Double) {
+        TODO("Not yet implemented")
     }
-
-
 }

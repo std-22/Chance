@@ -21,11 +21,12 @@
     <string name="formulae">formulae</string>
 
     <!-- Distribution types -->
-    <string-array name="distribution_types">
-        <item>Биноминальное</item>
-        <item>Пуассона</item>
-        <item>Экспоненциальное</item>
-        <item>Геометрическое</item>
-        <item>Биноминальное</item>
-    </string-array>
+    <string name="binomial">Биноминальное</string>
+    <string name="poisson">Пуассона</string>
+    <string name="geometric">Геометрическое</string>
+    <string name="hyper_geometric">Гипергеометрическое</string>
+    <string name="exponential">Экспоненциальное</string>
+    <string name="uniform">Равномерное</string>
+    <string name="normal">Нормальное</string>
+    <string name="input_lambda">Введите лямбда</string>
 </resources>

@@ -27,21 +27,31 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
         }
     }
 
-    override fun setDistribution(
-        distributionName: String,
-        eventQuantity: Int,
-        eventProbability: Double,
-        lambda: Double
-    ) {
-        when (distributionName) {
-            "Биноминальное" -> {
-                model.binomialModel(eventQuantity, eventProbability)
-            }
-            "Пуассона" -> {
-                model.poissonModel(eventQuantity, lambda)
-            }
-        }
+    override fun setBinomialDistribution(eventQuantity: Int, eventProbability: Double) {
+        model.binomialModel(eventQuantity, eventProbability)
+        setView()
+    }
 
+    override fun setPoissonDistribution(lambda: Double) {
+        model.poissonModel(lambda)
+        setView()
+    }
+
+    override fun setExpDistribution(lambda: Double) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setGeomDistribution(eventProbability: Double) {
+        model.geomModel(eventProbability)
+        setView()
+    }
+
+    override fun setUniformDistribution(inputStart: Double, inputEnd: Double) {
+        model.uniformModel(inputStart, inputEnd)
+    }
+
+
+    private fun setView() {
         view.setDistributionProbability(model.distributionProbability)
         view.setMathExp(model.mathExp.toString())
         view.setDispersion(model.dispersion.toString())
@@ -53,8 +63,4 @@ class DistributionPresenterImpl(_view: DistributionView) : DistributionPresenter
     override fun getDispersion() = model.dispersion
 
     override fun getDistribution() = model.distributionProbability
-
-    override fun toString(): String {
-        return "${model.mathExp}, ${model.dispersion}"
-    }
 }

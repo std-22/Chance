@@ -16,6 +16,7 @@
     <style name="table_cell_style">
         <item name="android:textSize">36sp</item>
         <item name="android:visibility">gone</item>
+        <item name="android:padding">5dp</item>
         <item name="minWidth">75dp</item>
         <item name="android:textColor">@color/baltic_sea</item>
         <item name="android:textAlignment">center</item>

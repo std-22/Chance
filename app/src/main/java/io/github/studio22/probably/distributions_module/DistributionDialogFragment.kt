@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import io.github.studio22.probably.R
 
-class DistributionDialogFragment : DialogFragment() {
+class DistributionDialogFragment(private var distributionType: String) : DialogFragment() {
     private lateinit var listener: DialogListener
     private lateinit var builder: AlertDialog.Builder
     private var eventQuantity = 0
@@ -16,7 +16,9 @@ class DistributionDialogFragment : DialogFragment() {
 
     interface DialogListener {
         fun onDialogNegativeClick(dialog: DialogFragment)
-        fun onDialogPositiveClick(eventQuantity: Int, eventProbability: Double)
+        fun onDialogPositiveClick(eventQuantity: Int = 0,
+                                  eventProbability: Double = 0.0,
+                                  lambda: Double = 0.0)
     }
 
     override fun onAttach(context: Context) {
@@ -34,22 +36,67 @@ class DistributionDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater
-            builder.setView(inflater.inflate(R.layout.dialog, null))
-                .setTitle("Ввод данных")
-                .setPositiveButton("OK") { _, _ ->
-                    eventQuantity = dialog?.findViewById<EditText>(R.id.input_event_number)
-                        ?.text.toString().toInt()
-                    eventCharacteristic =
-                        dialog?.findViewById<EditText>(R.id.input_event_probability)
-                            ?.text.toString().toDouble()
-                    listener.onDialogPositiveClick(eventQuantity, eventCharacteristic)
-                }
-                .setNegativeButton("CANCEL") { _, _ ->
-                    listener.onDialogNegativeClick(this)
-                }
-                .create()
+            createDialog()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-    
+
+    private fun createDialog(): Dialog {
+        val inflater = requireActivity().layoutInflater
+        builder
+            .setTitle("Ввод данных")
+            .setNegativeButton("CANCEL") { _, _ ->
+                listener.onDialogNegativeClick(this)
+            }
+        return when (distributionType) {
+            resources.getString(R.string.binomial) -> {
+                builder
+                    .setView(inflater.inflate(R.layout.dialog, null))
+                    .setPositiveButton("OK") { _, _ ->
+                        eventQuantity = dialog?.findViewById<EditText>(R.id.input_event_number)
+                            ?.text.toString().toInt()
+                        eventCharacteristic =
+                            dialog?.findViewById<EditText>(R.id.input_event_probability)
+                                ?.text.toString().toDouble()
+                        listener.onDialogPositiveClick(eventQuantity, eventCharacteristic)
+                    }
+                    .create()
+            }
+            resources.getString(R.string.poisson) -> {
+                val inputLambda = EditText(context)
+                builder
+                    .setMessage("Введите lambda")
+                    .setView(inputLambda)
+                    .setPositiveButton("OK") { _, _ ->
+                        eventCharacteristic = inputLambda.text.toString().toDouble()
+                        listener.onDialogPositiveClick(lambda = eventCharacteristic)
+                    }
+                    .create()
+            }
+            resources.getString(R.string.geometric) -> {
+                val inputProbability = EditText(context)
+                builder
+                    .setMessage("Введите вероятность события")
+                    .setView(inputProbability)
+                    .setPositiveButton("OK") {_, _ ->
+                        eventCharacteristic = inputProbability.text.toString().toDouble()
+                        listener.onDialogPositiveClick(eventProbability = eventCharacteristic)
+                    }
+                    .create()
+            }
+            resources.getString(R.string.uniform) -> {
+                val inputStart = EditText(context)
+                val inputEnd = EditText(context)
+                builder
+                    .setView(inputStart)
+                    .setView(inputEnd)
+                    .setPositiveButton("OK") {_, _ ->
+
+                    }
+                    .create()
+            }
+            else -> {
+                throw IllegalStateException("Activity cannot be null")
+            }
+        }
+    }
 }

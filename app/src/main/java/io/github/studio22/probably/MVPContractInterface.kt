@@ -4,12 +4,10 @@ interface MVPContractInterface {
 
     interface DistributionModel {
         fun binomialModel(eventQuantity: Int, eventProbability: Double)
-        fun geomShortModel(eventQuantity: Int, eventProbability: Double)
         fun geomModel(eventProbability: Double)
-        fun poissonModel(eventQuantity: Int, lambda: Double)
+        fun poissonModel(lambda: Double)
         fun expModel(lambda: Double)
         fun uniformModel(start: Double, end: Double)
-
     }
 
     interface DistributionView {
@@ -21,12 +19,11 @@ interface MVPContractInterface {
     }
 
     interface DistributionPresenter {
-        fun setDistribution(
-            distributionName: String,
-            eventQuantity: Int = 0,
-            eventProbability: Double = 0.0,
-            lambda: Double = 0.0
-        )
+        fun setBinomialDistribution(eventQuantity: Int, eventProbability: Double)
+        fun setPoissonDistribution(lambda: Double)
+        fun setExpDistribution(lambda: Double)
+        fun setGeomDistribution(eventProbability: Double)
+        fun setUniformDistribution(inputStart: Double, inputEnd: Double)
         fun getMathExp(): Double
         fun getDispersion(): Double
         fun getDistribution(): DoubleArray

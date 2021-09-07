@@ -2,6 +2,8 @@ package io.github.studio22.probably.distributions_module.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -13,6 +15,7 @@ import io.github.studio22.probably.MVPContractInterface
 import io.github.studio22.probably.R
 import io.github.studio22.probably.distributions_module.DistributionDialogFragment
 import io.github.studio22.probably.distributions_module.presenter.DistributionPresenterImpl
+import io.github.studio22.probably.extensions.setStyle
 
 
 class DistributionActivityView : MVPContractInterface.DistributionView,
@@ -45,38 +48,48 @@ class DistributionActivityView : MVPContractInterface.DistributionView,
     }
 
     override fun openDialog(distributionName: String) {
-        val dialog = DistributionDialogFragment()
-        dialog.show(supportFragmentManager, "")
+        val dialog = DistributionDialogFragment(intent.extras?.get("distribution_name").toString())
+        dialog.show(supportFragmentManager, "dialog")
     }
 
     override fun setDistributionProbability(array: DoubleArray) {
-        val eventNumbers = intArrayOf(
-            R.id.event_0,
-            R.id.event_1,
-            R.id.event_2,
-            R.id.event_3,
-            R.id.event_4,
-            R.id.event_5,
-            R.id.event_6,
-            R.id.event_7
-        )
-        val eventNumberProbabilities = intArrayOf(
-            R.id.p0,
-            R.id.p1,
-            R.id.p2,
-            R.id.p3,
-            R.id.p4,
-            R.id.p5,
-            R.id.p6,
-            R.id.p7
-        )
+//        val eventNumbersTextView = findViewById<TextView>(R.id.event_numbers)
+//        eventNumbersTextView.visibility = View.VISIBLE
+//        val eventProbabilitiesTextView = findViewById<TextView>(R.id.event_probabilities)
+//        eventProbabilitiesTextView.visibility = View.VISIBLE
+        val params1: TableRow.LayoutParams =
+            TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1.0f
+            )
+        val params2: TableRow.LayoutParams =
+            TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+            )
+        val tableLayout = findViewById<TableLayout>(R.id.table)
+        val eventNumbersTableRow = TableRow(this)
         for (i in array.indices) {
-            val eventNumberTV = findViewById<TextView>(eventNumbers[i])
-            eventNumberTV.visibility = View.VISIBLE
-            val eventProbabilityTV = findViewById<TextView>(eventNumberProbabilities[i])
-            eventProbabilityTV.visibility = View.VISIBLE
-            eventProbabilityTV.text = array[i].toString()
+            val textView = TextView(this)
+            textView.text = i.toString()
+            textView.layoutParams = params1
+            textView.setStyle()
+            eventNumbersTableRow.addView(textView)
         }
+        eventNumbersTableRow.layoutParams = params2
+        tableLayout.addView(eventNumbersTableRow)
+        val eventProbabilityTableRow = TableRow(this)
+        for (i in array.indices) {
+            val textView = TextView(this)
+            textView.text = array[i].toString()
+            textView.layoutParams = params1
+            textView.setStyle()
+            eventProbabilityTableRow.addView(textView)
+        }
+        eventProbabilityTableRow.layoutParams = params2
+        tableLayout.addView(eventProbabilityTableRow)
+
     }
 
     override fun setMathExp(mathExp: String) {
@@ -143,11 +156,19 @@ class DistributionActivityView : MVPContractInterface.DistributionView,
         onSupportNavigateUp()
     }
 
-    override fun onDialogPositiveClick(eventQuantity: Int, eventProbability: Double) {
-        presenter?.setDistribution(
-            intent.extras?.get("distribution_name").toString(),
-            eventQuantity,
-            eventProbability
-        )
+    override fun onDialogPositiveClick(
+        eventQuantity: Int,
+        eventProbability: Double,
+        lambda: Double
+    ) {
+        when (intent.extras?.get("distribution_name").toString()) {
+            resources.getString(R.string.binomial) ->
+                presenter?.setBinomialDistribution(eventQuantity, eventProbability)
+            resources.getString(R.string.poisson) ->
+                presenter?.setPoissonDistribution(lambda)
+            resources.getString(R.string.geometric) ->
+                presenter?.setGeomDistribution(eventProbability)
+        }
     }
+
 }
